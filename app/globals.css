@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-primary: #6D28D9;
+  --color-brand-secondary: #4F46E5;
+  --color-brand-accent: #A855F7;
+  
+  --color-bg-deep: #050505;
+  --color-bg-card: #0F0F12;
+  --color-bg-card-hover: #16161D;
+  
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-bright: rgba(255, 255, 255, 0.2);
+
+  --font-sans: "Outfit", var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #050505;
+  --foreground: #F9FAFB;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-brand-primary via-brand-accent to-brand-secondary;
+  }
+  
+  .bg-gradient-premium {
+    @apply bg-linear-to-br from-brand-primary via-brand-secondary to-indigo-900;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300
+           bg-linear-to-r from-brand-primary to-brand-secondary 
+           hover:scale-105 hover:shadow-[0_0_20px_rgba(109,40,217,0.5)] 
+           active:scale-95;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300
+           border border-border-subtle hover:border-border-bright
+           hover:bg-white/5 active:scale-95;
+  }
+}
+
